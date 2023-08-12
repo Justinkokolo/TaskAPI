@@ -7,14 +7,17 @@ using TaskApi.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure CORS
+
+
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(builder =>
-    {
-        builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader();
-    });
+    options.AddPolicy("AllowAnyOriginPolicy",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
 });
 
 // Add services to the container.
@@ -47,7 +50,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 // Enable CORS
-app.UseCors();
+//app.UseCors();
+app.UseCors("AllowAnyOriginPolicy");
 
 
 app.UseAuthentication();
