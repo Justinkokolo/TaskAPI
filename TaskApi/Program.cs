@@ -6,6 +6,17 @@ using TaskApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure CORS
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 // Add services to the container.
 
 //builder.Services.AddControllers();
@@ -36,13 +47,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 // Enable CORS
-app.UseCors(options =>
-{
-    options
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader();
-});
+app.UseCors();
 
 
 app.UseAuthentication();

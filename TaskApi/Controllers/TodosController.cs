@@ -17,7 +17,6 @@ namespace TaskApi.Controllers
             _context = context;
         }
 
-        // GET: api/Todos
         [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetTodos()
